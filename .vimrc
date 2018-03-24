@@ -1,28 +1,65 @@
-"" Leader Commands 
+"" Leader Commands
 let mapleader = ","
 
-" plugins
-call plug#begin()
-Plug 'tpope/vim-surround'
-Plug 'scrooloose/nerdtree'
-Plug 'kien/ctrlp.vim'
-Plug 'vim-syntastic/syntastic'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-repeat'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+syntax enable
+filetype plugin indent on
+filetype plugin on
 
-call plug#end()
+set omnifunc=syntaxcomplete#complete
+
+" plugins
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'edkolev/tmuxline.vim'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'tpope/vim-surround'
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-repeat'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'altercation/vim-colors-solarized'
+
+call vundle#end()
+
+" tmux like split commands
+
+" Theme
+if has('gui_running')
+    set background=light
+else
+    set background=dark
+endif
 
 let g:airline_powerline_fonts = 1
-" Theme 
-set background=dark
-colorscheme flattened_dark
+colorscheme solarized
 
-""movement
+nnoremap Y y$
+
+"" Movement
 nnoremap j gj
 nnoremap k gk
-nnoremap Y y$
+vnoremap j gj
+vnoremap k gk
+
+" Logical big movements
+nnoremap K H
+nnoremap J L
+nnoremap H ^
+nnoremap L g_
+vnoremap K H
+vnoremap J L
+vnoremap H ^
+vnoremap L g_
+
+"new hotkey for joinLine
+noremap <leader>j J
+nnoremap <leader>gj gJ
+vnoremap <leader>j J
+vnoremap <leader>gj gJ
 
 ""life saver
 vnoremap u <nop>
@@ -33,13 +70,14 @@ vnoremap gU U
 " highlight last inserted text
 nnoremap gV `[v`]
 
-"inoremap jk <esc>
-nnoremap <Leader>b ^
-nnoremap <Leader>e g_
-vnoremap <Leader>b ^
-vnoremap <Leader>e g_
+nnoremap <Silent><Leader>\ :vsplit<CR>
+nnoremap <Silent><Leader>\| :vsplit<CR>
+vnoremap <Silent><Leader>\ <Esc>:vsplit<CR>
+vnoremap <Silent><Leader>\| <Esc>:vsplit<CR>
+nnoremap <Silent><Leader>- :split<CR>
+vnoremap <Silent><Leader>- <Esc>:split<CR>
 
-"" window movement
+"" tmux + window movement
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
@@ -54,43 +92,70 @@ set softtabstop=4
 set expandtab
 
 "" Basic usability
-set cmdheight=2
+set timeoutlen=1000
+set ttimeoutlen=0 "snappy esc
+set lazyredraw
+""set cmdheight=2
 set number
+set relativenumber
 set cursorline
 set showcmd
 set wildmenu
 set showmatch
 set hidden
 set confirm
-set ignorecase
-set smartcase
 set nostartofline
 set wildignore=*.o,*.obj,*.bak,*.exe
 set laststatus=2
 set showcmd
+set history=100
+nnoremap <CR> o<Esc>
 
+"Mouse
+set mouse+=a
+if &term =~ '^screen'
+    " tmux knows the extended mouse mode
+    set ttymouse=xterm2
+endif
 
-syntax enable
-filetype plugin indent on
-filetype plugin on
+" Search
+set hlsearch
+set ignorecase
+set smartcase
+set gdefault
 
-set omnifunc=syntaxcomplete#complete
+" some shortcuts
+nnoremap <leader>q @q
+nnoremap <Silent><Leader>n :set relativenumber!<cr>"
+nnoremap <leader>x :x<cr>
 
+" Maintain selection for indents
+vnoremap > >gv
+vnoremap < <gv
 
+"" proper copy and paste from clipboard
+vnoremap <leader>y :w !pbcopy<CR><CR> 
+vnoremap <leader>c :w !pbcopy<CR><CR> 
+nnoremap <leader>v :r !pbpaste<CR><CR>
+vnoremap <leader>v :r !pbpaste<CR><CR>
+
+" paste last yanked line
+nnoremap <leader>p "0p
+nnoremap <leader>P "0P
 
 "" nerd tree
 map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
+let NERDTreeHijackNetrw=1
 
 "" ctrl-p
 let g:ctrlp_map = '<c-p>'
     let g:ctrlp_cmd = 'CtrlP'
+nnoremap <leader>b :CtrlPBuffer<CR>
+nnoremap <leader>f :CtrlP<CR>
 
 "" Pasting from outside Terminal
-
 set pastetoggle=<F2>
-
 
 "" Folding
 set foldenable
@@ -98,17 +163,17 @@ set foldlevelstart=10
 set foldnestmax=10
 set foldmethod=indent
 
-nnoremap <Leader>P "+p
-nnoremap <Leader>p "*p
-nnoremap <Leader>y "*y
+"nnoremap <Leader>P "+p
+"nnoremap <Leader>p "*p
+"nnoremap <Leader>y "*y
 nnoremap <Leader><space> :nohl<CR>
 
 "" Shortcuts to edit vimrc/zshrc and source vimrc
 " edit vimrc/zshrc and load vimrc bindings
-nnoremap <leader>vrc :vsp $MYVIMRC<CR>
-nnoremap <leader>zrc :vsp ~/.zshrc<CR>
+nnoremap <leader>ev :vsp $MYVIMRC<CR>
+nnoremap <leader>ez :vsp ~/.zshrc<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " save session
-nnoremap <leader>s :mksession<CR>
+"nnoremap <leader>s :mksession<CR>
 
