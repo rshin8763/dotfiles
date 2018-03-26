@@ -3,29 +3,34 @@ let mapleader = ","
 
 syntax enable
 filetype plugin indent on
-filetype plugin on
 
 set omnifunc=syntaxcomplete#complete
 
 " plugins
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'edkolev/tmuxline.vim'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'tpope/vim-surround'
-Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-repeat'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'altercation/vim-colors-solarized'
 
-call vundle#end()
+call plug#begin('~/.vim/plugged')
+Plug 'edkolev/tmuxline.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-surround'
+Plug 'scrooloose/nerdtree'
+Plug 'kien/ctrlp.vim'
+Plug 'mhartington/nvim-typescript'
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'zchee/deoplete-clang'
+Plug 'vim-syntastic/syntastic'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'altercation/vim-colors-solarized'
+" Plug 'Valloric/YouCompleteMe'
+Plug 'ajh17/VimCompletesMe'
+call plug#end()
 
-" tmux like split commands
+" let g:deoplete#enable_at_startup = 1
+" let g:deoplete#sources#clang#libclang_path='/usr/local/Cellar/llvm/6.0.0/lib/libclang.dylib'
+" let g:deoplete#sources#clang#clang_header='/usr/local/Cellar/llvm/6.0.0/lib/clang'
+" let g:deoplete#enable_smart_case = 1
 
 " Theme
 if has('gui_running')
@@ -108,7 +113,6 @@ set nostartofline
 set wildignore=*.o,*.obj,*.bak,*.exe
 set laststatus=2
 set showcmd
-set history=100
 nnoremap <CR> o<Esc>
 
 "Mouse
@@ -135,7 +139,7 @@ vnoremap < <gv
 
 "" proper copy and paste from clipboard
 vnoremap <leader>y :w !pbcopy<CR><CR> 
-vnoremap <leader>c :w !pbcopy<CR><CR> 
+vnoremap <leader>y :w !pbcopy<CR><CR> 
 nnoremap <leader>v :r !pbpaste<CR><CR>
 vnoremap <leader>v :r !pbpaste<CR><CR>
 

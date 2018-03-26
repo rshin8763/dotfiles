@@ -93,10 +93,16 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
+alias ff="open /Applications/Firefox.app"
+alias vim="nvim" 
+
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+autoload -U add-zsh-hook
+add-zsh-hook -Uz chpwd (){ ls; }
 
 prompt_context() {}
 
