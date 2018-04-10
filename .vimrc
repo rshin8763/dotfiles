@@ -117,6 +117,7 @@ nnoremap <CR> o<Esc>
 
 "Mouse
 set mouse+=a
+set clipboard=unnamed
 if &term =~ '^screen'
     " tmux knows the extended mouse mode
     set ttymouse=xterm2
@@ -138,10 +139,12 @@ vnoremap > >gv
 vnoremap < <gv
 
 "" proper copy and paste from clipboard
-vnoremap <leader>y :w !pbcopy<CR><CR> 
-vnoremap <leader>y :w !pbcopy<CR><CR> 
-nnoremap <leader>v :r !pbpaste<CR><CR>
-vnoremap <leader>v :r !pbpaste<CR><CR>
+vnoremap <leader>y "+y
+nnoremap <leader>Y "+yy
+nnoremap <leader>v "+p
+vnoremap <leader>v "+p
+nnoremap <leader>V "+P
+vnoremap <leader>V "+P
 
 " paste last yanked line
 nnoremap <leader>p "0p
