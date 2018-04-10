@@ -138,10 +138,15 @@ vnoremap > >gv
 vnoremap < <gv
 
 "" proper copy and paste from clipboard
+"" osx
 vnoremap <leader>y :w !pbcopy<CR><CR> 
 vnoremap <leader>y :w !pbcopy<CR><CR> 
 nnoremap <leader>v :r !pbpaste<CR><CR>
 vnoremap <leader>v :r !pbpaste<CR><CR>
+
+nnoremap <Leader>P "+p
+nnoremap <Leader>p "*p
+vnoremap <Leader>y "*y
 
 " paste last yanked line
 nnoremap <leader>p "0p
@@ -167,9 +172,6 @@ set foldlevelstart=10
 set foldnestmax=10
 set foldmethod=indent
 
-"nnoremap <Leader>P "+p
-"nnoremap <Leader>p "*p
-"nnoremap <Leader>y "*y
 nnoremap <Leader><space> :nohl<CR>
 
 "" Shortcuts to edit vimrc/zshrc and source vimrc
