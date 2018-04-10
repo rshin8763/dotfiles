@@ -1,4 +1,15 @@
-eval `dircolors ~/dircolors-solarized/dircolors.ansi-dark`
+case `uname` in 
+    Darwin)
+        # commands for OSX go here
+        eval `gdircolors ~/.dircolors-solarized/dircolors.ansi-dark`
+        alias ff="open /Applications/Firefox.app"
+        alias vim="nvim" 
+    ;;
+    Linux)
+        # commands for Linux go here
+        eval `dircolors ~/.dircolors-solarized/dircolors.ansi-dark`
+    ;;
+esac
 
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -94,8 +105,6 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias ff="open /Applications/Firefox.app"
-alias vim="nvim" 
 
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
